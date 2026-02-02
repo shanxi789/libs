@@ -16,14 +16,16 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseMvvmActivity<VM : ViewModel, VB : ViewBinding> : AppCompatActivity() {
 
     /**
+     * ViewModel实例
+     */
+    protected lateinit var mViewModel: VM
+
+    /**
      * ViewBinding实例
      */
     protected lateinit var mBinding: VB
 
-    /**
-     * ViewModel实例
-     */
-    protected lateinit var mViewModel: VM
+    protected lateinit var mContext: AppCompatActivity
 
     /**
      * 初始化视图
@@ -44,6 +46,8 @@ abstract class BaseMvvmActivity<VM : ViewModel, VB : ViewBinding> : AppCompatAct
         super.onCreate(savedInstanceState)
         mBinding = autoCreateViewBinding()
         setContentView(mBinding.root)
+
+        mContext = this
 
         initViewModel()
         initView()

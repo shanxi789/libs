@@ -5,16 +5,17 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
 }
-
+def config = rootProject.ext.android
+def dependent = rootProject.ext.dependent
 
 android {
-    compileSdk 32
+    compileSdk config.compileSdkVersion
 
     defaultConfig {
-        minSdk 24
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        minSdk config.minSdkVersion
+        targetSdk config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -46,4 +47,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    api dependent.recycle_adapter
 }
